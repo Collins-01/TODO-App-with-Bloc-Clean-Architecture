@@ -1,4 +1,6 @@
 import 'package:bloc_clean_architecture/UIs/home/blocs/home_cubits.dart';
+import 'package:bloc_clean_architecture/UIs/home/blocs/home_states.dart';
+import 'package:bloc_clean_architecture/UIs/home/components/build_home_tab_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +25,18 @@ class _HomeViewContents extends StatelessWidget {
     return Scaffold(
       body: IndexedStack(
         index: selectedTab.index,
-        children: [],
+        children: [
+          HomeTabButton(
+            groupValue: selectedTab,
+            value: HomeTab.stats,
+            icon: const Icon(Icons.list_rounded),
+          ),
+          HomeTabButton(
+            groupValue: selectedTab,
+            value: HomeTab.todos,
+            icon: const Icon(Icons.show_chart_rounded),
+          ),
+        ],
       ),
     );
   }

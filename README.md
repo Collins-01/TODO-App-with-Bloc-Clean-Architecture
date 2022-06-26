@@ -9,6 +9,7 @@ A clean implementation of BLoC pattern, inspired by Very-Good-Venture's Todo-App
 - BLoC : Managing Business Logic
 - Equotable : Comparing Objects (Classes)
 - SharedPreference : Local Storage of Data
+- Flutter BLoC : Managing Blocs and Cubits on the Views
 
 
 
