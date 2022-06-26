@@ -29,7 +29,7 @@ void bootstrap({required TodosApi todosApi}) {
         () async => runApp(
           App(todosRepository: todosRepository),
         ),
-        blocObserver: AppBlocObserver(),
+        // blocObserver: AppBlocObserver(),
       );
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
