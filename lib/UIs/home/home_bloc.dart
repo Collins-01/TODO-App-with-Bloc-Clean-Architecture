@@ -10,6 +10,7 @@ class TodosHomeBloc extends Bloc<TodosOverviewEvent, TodoOverviewState> {
       : _todosRepository = todosRepository,
         super(const TodoOverviewState()) {
     on<TodosOverviewSubscriptionRequested>(_onSubscriptionRequested);
+    on<TodoOverViewCompletionToggled>(_onTodoOverViewCompletionToggled);
   }
 
   Future<void> _onSubscriptionRequested(
@@ -28,5 +29,13 @@ class TodosHomeBloc extends Bloc<TodosOverviewEvent, TodoOverviewState> {
         status: () => TodosOverviewStatus.failure,
       ),
     );
+  }
+
+  Future<void> _onTodoOverViewCompletionToggled(
+    TodoOverViewCompletionToggled event,
+    Emitter<TodoOverviewState> emit,
+  ) async {
+    final newTodo = event.todo.copyWith(isCompleted: event.isCompleted);
+    await _todosRepository.saveTodo(newTodo);
   }
 }

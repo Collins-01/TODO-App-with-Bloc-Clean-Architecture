@@ -1,3 +1,4 @@
+import 'package:bloc_clean_architecture/UIs/home/home_view.dart';
 import 'package:bloc_clean_architecture/core/repositories/todo_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,11 +23,11 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'TODO BLoC Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(),
+      home: const HomeView(),
     );
   }
 }
