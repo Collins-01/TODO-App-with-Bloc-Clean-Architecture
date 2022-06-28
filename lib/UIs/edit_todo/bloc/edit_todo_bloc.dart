@@ -33,12 +33,17 @@ class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
     Emitter<EditTodoState> emit,
   ) async {
     emit(state.copyWith(status: EditTodoStatus.loading));
-    final todo = (state.initialTodo ?? Todo(title: '')).copyWith(
+    final todo = (state.initialTodo ??
+            Todo(
+              title: '',
+            ))
+        .copyWith(
       title: state.title,
       description: state.description,
     );
 
     try {
+      print(todo.toJson());
       await _todosRepository.saveTodo(todo);
       emit(state.copyWith(status: EditTodoStatus.success));
     } catch (e) {

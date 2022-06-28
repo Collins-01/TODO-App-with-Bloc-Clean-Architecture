@@ -4,9 +4,9 @@ import 'package:bloc_clean_architecture/UIs/home/blocs/home_states.dart';
 import 'package:bloc_clean_architecture/core/models/todo.dart';
 import 'package:bloc_clean_architecture/core/repositories/todo_repository.dart';
 
-class TodosHomeBloc extends Bloc<TodosOverviewEvent, TodoOverviewState> {
+class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodoOverviewState> {
   final TodosRepository _todosRepository;
-  TodosHomeBloc({required TodosRepository todosRepository})
+  TodosOverviewBloc({required TodosRepository todosRepository})
       : _todosRepository = todosRepository,
         super(const TodoOverviewState()) {
     on<TodosOverviewSubscriptionRequested>(_onSubscriptionRequested);
@@ -26,13 +26,14 @@ class TodosHomeBloc extends Bloc<TodosOverviewEvent, TodoOverviewState> {
     Emitter<TodoOverviewState> emit,
   ) async {
     emit(state.copyWith(status: () => TodosOverviewStatus.loading));
-
     await emit.forEach<List<Todo>>(
       _todosRepository.getTodos(),
-      onData: (todos) => state.copyWith(
-        status: () => TodosOverviewStatus.success,
-        todos: () => todos,
-      ),
+      onData: (todos) {
+        return state.copyWith(
+          status: () => TodosOverviewStatus.success,
+          todos: () => todos,
+        );
+      },
       onError: (_, __) => state.copyWith(
         status: () => TodosOverviewStatus.failure,
       ),

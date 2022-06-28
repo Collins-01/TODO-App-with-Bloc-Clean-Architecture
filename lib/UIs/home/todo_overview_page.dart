@@ -17,11 +17,14 @@ class TodoOverViewPage extends StatelessWidget {
     /// `BlocProvider` wraps the entire widget with the Bloc  that will be used for that page
     /// Just the the ViewModel for that view, so we can have access to the `Bloc or Cubit`
     return BlocProvider(
-      create: (context) => TodosHomeBloc(
+      create: (context) => TodosOverviewBloc(
         todosRepository: context.read<TodosRepository>(),
       )..add(const TodosOverviewSubscriptionRequested()),
       child: const TodoOverViewPage(),
     );
+    // return Scaffold(
+    //   backgroundColor: Colors.green,
+    // );
   }
 }
 
@@ -32,80 +35,80 @@ class TodoOverviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("TODOs"),
+        title: const Text("Todo Overview"),
         actions: const [
-          TodosOverviewFilterButton(),
-          TodosOverviewOptionsButton(),
+          // TodosOverviewFilterButton(),
+          // TodosOverviewOptionsButton(),
         ],
       ),
 
       ///Bloc Listeners are used to listen and act on recived events.
-      body: MultiBlocListener(
-        listeners: [
-          /// Shows a snackbar, if there is an error
-          BlocListener<TodosHomeBloc, TodoOverviewState>(
-            listenWhen: (previous, current) =>
-                previous.status != current.status,
-            listener: (context, state) {
-              if (state.status == TodosOverviewStatus.failure) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    const SnackBar(
-                      content: Text("An error Occured"),
-                    ),
-                  );
-              }
-            },
-          ),
+      // body: MultiBlocListener(
+      //   listeners: [
+      //     /// Shows a snackbar, if there is an error
+      //     BlocListener<TodosOverviewBloc, TodoOverviewState>(
+      //       listenWhen: (previous, current) =>
+      //           previous.status != current.status,
+      //       listener: (context, state) {
+      //         if (state.status == TodosOverviewStatus.failure) {
+      //           ScaffoldMessenger.of(context)
+      //             ..hideCurrentSnackBar()
+      //             ..showSnackBar(
+      //               const SnackBar(
+      //                 content: Text("An error Occured"),
+      //               ),
+      //             );
+      //         }
+      //       },
+      //     ),
 
-          BlocListener<TodosHomeBloc, TodoOverviewState>(
-            listenWhen: (previous, current) =>
-                previous.status != current.status,
-            listener: (context, state) {
-              final deletedTodo = state.lastDeletedTodo!;
-              final messenger = ScaffoldMessenger.of(context);
-              messenger
-                ..hideCurrentSnackBar()
-                ..showSnackBar(SnackBar(
-                    action: SnackBarAction(
-                        label: "",
-                        onPressed: () => context
-                            .read<TodosHomeBloc>()
-                            .add(const TodosOverviewUndoDeletionRequested())),
-                    content: Text(
-                        "Are you sure you want to delete, ${deletedTodo.title} ? ")));
-            },
-          ),
-        ],
+      //     BlocListener<TodosOverviewBloc, TodoOverviewState>(
+      //       listenWhen: (previous, current) =>
+      //           previous.status != current.status,
+      //       listener: (context, state) {
+      //         final deletedTodo = state.lastDeletedTodo!;
+      //         final messenger = ScaffoldMessenger.of(context);
+      //         messenger
+      //           ..hideCurrentSnackBar()
+      //           ..showSnackBar(SnackBar(
+      //               action: SnackBarAction(
+      //                   label: "",
+      //                   onPressed: () => context
+      //                       .read<TodosOverviewBloc>()
+      //                       .add(const TodosOverviewUndoDeletionRequested())),
+      //               content: Text(
+      //                   "Are you sure you want to delete, ${deletedTodo.title} ? ")));
+      //       },
+      //     ),
+      //   ],
 
-        /// The `Builder` listens and builds the UIs to react to a particular `event or state`
-        child: BlocBuilder<TodosHomeBloc, TodoOverviewState>(
-            builder: (context, state) {
-          if (state.todos.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      //   /// The `Builder` listens and builds the UIs to react to a particular `event or state`
+      //   child: BlocBuilder<TodosOverviewBloc, TodoOverviewState>(
+      //       builder: (context, state) {
+      //     if (state.todos.isEmpty) {
+      //       return const Center(child: CircularProgressIndicator());
+      //     }
 
-          return CupertinoScrollbar(
-            child: ListView(
-              children: [
-                for (final todo in state.todos)
-                  TodoListTile(
-                    todo: todo,
-                    onToggleCompleted: (isCompleted) {
-                      context.read<TodosHomeBloc>().add(
-                            TodoOverViewCompletionToggled(
-                                isCompleted: isCompleted, todo: todo),
-                          );
-                    },
-                    onDismissed: (_) => context.read<TodosHomeBloc>()
-                      ..add(TodoOverviewDeleted(todo: todo)),
-                  )
-              ],
-            ),
-          );
-        }),
-      ),
+      //     return CupertinoScrollbar(
+      //       child: ListView(
+      //         children: [
+      //           for (final todo in state.todos)
+      //             TodoListTile(
+      //               todo: todo,
+      //               onToggleCompleted: (isCompleted) {
+      //                 context.read<TodosOverviewBloc>().add(
+      //                       TodoOverViewCompletionToggled(
+      //                           isCompleted: isCompleted, todo: todo),
+      //                     );
+      //               },
+      //               onDismissed: (_) => context.read<TodosOverviewBloc>()
+      //                 ..add(TodoOverviewDeleted(todo: todo)),
+      //             )
+      //         ],
+      //       ),
+      //     );
+      //   }),
+      // ),
     );
   }
 }

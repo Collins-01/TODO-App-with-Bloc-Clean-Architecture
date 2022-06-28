@@ -8,14 +8,17 @@ class Todo extends Equatable {
   final String description;
   final String id;
   final bool isCompleted;
-  Todo({
-    String? id,
-    this.description = '',
-    this.isCompleted = false,
-    required this.title,
-  })  : assert(id == null || id.isEmpty,
-            "id can not be null and id should not be empty"),
-        id = id ?? const Uuid().v4();
+  const Todo(
+      {
+      // String? id,
+      this.description = '',
+      this.isCompleted = false,
+      required this.title,
+      this.id = '1234345556666'});
+
+  //  : assert(id == null || id.isEmpty,
+  //           "id can not be null and id should not be empty"),
+  //       id = id ?? const Uuid().v4();
 
   Todo copyWith({
     String? id,
@@ -35,7 +38,7 @@ class Todo extends Equatable {
         title: json['title'],
         description: json['description'],
         id: json['id'],
-        isCompleted: json['isCompleteds'],
+        isCompleted: json['isCompleted'],
       );
 
   Map<String, dynamic> toJson() {

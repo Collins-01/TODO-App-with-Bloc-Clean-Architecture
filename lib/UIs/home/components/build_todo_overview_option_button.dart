@@ -13,7 +13,7 @@ class TodosOverviewOptionsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     // final l10n = context.l10n;
 
-    final todos = context.select((TodosHomeBloc bloc) => bloc.state.todos);
+    final todos = context.select((TodosOverviewBloc bloc) => bloc.state.todos);
     final hasTodos = todos.isNotEmpty;
     final completedTodosAmount = todos.where((todo) => todo.isCompleted).length;
 
@@ -26,12 +26,12 @@ class TodosOverviewOptionsButton extends StatelessWidget {
         switch (options) {
           case TodosOverviewOption.toggleAll:
             context
-                .read<TodosHomeBloc>()
+                .read<TodosOverviewBloc>()
                 .add(const TodoOverviewToggleAllRequested());
             break;
           case TodosOverviewOption.clearCompleted:
             context
-                .read<TodosHomeBloc>()
+                .read<TodosOverviewBloc>()
                 .add(const TodosOverviewClearCompletedRequested());
         }
       },

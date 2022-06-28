@@ -54,9 +54,7 @@ class EditTodoView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          isNewTodo
-              ? "l10n.editTodoAddAppBarTitle"
-              : "l10n.editTodoEditAppBarTitle",
+          isNewTodo ? "Create" : "Edit",
         ),
       ),
       floatingActionButton: FloatingActionButton(

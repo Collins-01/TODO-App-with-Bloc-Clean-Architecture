@@ -18,6 +18,7 @@ class LocalStorageTodosApi extends TodosApi {
       _plugin.setString(key, value);
   void _init() {
     final todosJson = _getValue(kTodosCollectionKey);
+    print("todosJson: $todosJson");
     if (todosJson != null) {
       final todos = List<Map>.from(json.decode(todosJson) as List)
           .map((jsonMap) => Todo.fromJson(Map<String, dynamic>.from(jsonMap)))
