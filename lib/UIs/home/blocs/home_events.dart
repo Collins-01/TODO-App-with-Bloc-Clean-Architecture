@@ -10,8 +10,16 @@ abstract class TodosOverviewEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class TodoOverviewToggleAllRequested extends TodosOverviewEvent {
+  const TodoOverviewToggleAllRequested();
+}
+
 class TodosOverviewSubscriptionRequested extends TodosOverviewEvent {
   const TodosOverviewSubscriptionRequested();
+}
+
+class TodosOverviewClearCompletedRequested extends TodosOverviewEvent {
+  const TodosOverviewClearCompletedRequested();
 }
 
 class TodoOverViewCompletionToggled extends TodosOverviewEvent {
