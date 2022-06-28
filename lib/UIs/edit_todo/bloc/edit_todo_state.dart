@@ -23,7 +23,7 @@ class EditTodoState extends Equatable {
   });
   bool get isNewTodo => initialTodo == null;
   @override
-  List<Object?> get props => [title, description, initialTodo];
+  List<Object?> get props => [title, description, initialTodo, status];
 
   EditTodoState copyWith(
       {String? description,

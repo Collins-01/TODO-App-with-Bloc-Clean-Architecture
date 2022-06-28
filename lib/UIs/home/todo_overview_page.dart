@@ -1,6 +1,8 @@
 import 'package:bloc_clean_architecture/UIs/home/blocs/home_events.dart';
 import 'package:bloc_clean_architecture/UIs/home/blocs/home_states.dart';
 import 'package:bloc_clean_architecture/UIs/home/components/build_todo_list_tile.dart';
+import 'package:bloc_clean_architecture/UIs/home/components/build_todo_overview_filter_button.dart';
+import 'package:bloc_clean_architecture/UIs/home/components/build_todo_overview_option_button.dart';
 import 'package:bloc_clean_architecture/UIs/home/home_bloc.dart';
 import 'package:bloc_clean_architecture/core/repositories/todo_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,8 +34,8 @@ class TodoOverviewView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("TODOs"),
         actions: const [
-          // TodosOverviewFilterButton(),
-          // TodosOverviewOptionsButton(),
+          TodosOverviewFilterButton(),
+          TodosOverviewOptionsButton(),
         ],
       ),
 
