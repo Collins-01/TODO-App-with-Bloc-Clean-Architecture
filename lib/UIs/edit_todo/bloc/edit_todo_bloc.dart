@@ -34,7 +34,7 @@ class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
   ) async {
     emit(state.copyWith(status: EditTodoStatus.loading));
     final todo = (state.initialTodo ??
-            Todo(
+            const Todo(
               title: '',
             ))
         .copyWith(

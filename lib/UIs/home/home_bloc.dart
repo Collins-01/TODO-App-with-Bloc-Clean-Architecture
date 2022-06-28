@@ -26,18 +26,26 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodoOverviewState> {
     Emitter<TodoOverviewState> emit,
   ) async {
     emit(state.copyWith(status: () => TodosOverviewStatus.loading));
-    await emit.forEach<List<Todo>>(
-      _todosRepository.getTodos(),
-      onData: (todos) {
-        return state.copyWith(
-          status: () => TodosOverviewStatus.success,
-          todos: () => todos,
-        );
-      },
-      onError: (_, __) => state.copyWith(
-        status: () => TodosOverviewStatus.failure,
+    Future.delayed(const Duration(seconds: 2));
+    emit(
+      state.copyWith(
+        status: () => TodosOverviewStatus.success,
+        todos: () => <Todo>[],
       ),
     );
+
+    // await emit.forEach<List<Todo>>(
+    //   _todosRepository.getTodos(),
+    //   onData: (todos) {
+    //     return state.copyWith(
+    //       status: () => TodosOverviewStatus.success,
+    //       todos: () => todos,
+    //     );
+    //   },
+    //   onError: (_, __) => state.copyWith(
+    //     status: () => TodosOverviewStatus.failure,
+    //   ),
+    // );
   }
 
   Future<void> _onTodoOverViewCompletionToggled(
