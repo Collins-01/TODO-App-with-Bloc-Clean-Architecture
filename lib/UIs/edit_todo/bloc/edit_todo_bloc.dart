@@ -6,9 +6,14 @@ import 'package:bloc_clean_architecture/core/repositories/todo_repository.dart';
 
 class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
   final TodosRepository _todosRepository;
-  EditTodoBloc({required TodosRepository todosRepository})
+  EditTodoBloc(
+      {required TodosRepository todosRepository, required Todo? initialTodo})
       : _todosRepository = todosRepository,
-        super(const EditTodoState()) {
+        super(EditTodoState(
+          initialTodo: initialTodo,
+          description: initialTodo?.description ?? '',
+          title: initialTodo?.title ?? '',
+        )) {
     on<EditTodoTitleChanged>(_onTitleChanged);
     on<EditTodoDescriptionChanged>(_onDescriptionChanged);
     on<EditTodoSubmitted>(_onSubmitted);
@@ -43,7 +48,6 @@ class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
     );
 
     try {
-      print(todo.toJson());
       await _todosRepository.saveTodo(todo);
       emit(state.copyWith(status: EditTodoStatus.success));
     } catch (e) {

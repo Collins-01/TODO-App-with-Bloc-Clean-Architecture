@@ -16,9 +16,10 @@ class EditTodoPage extends StatelessWidget {
       fullscreenDialog: true,
       builder: (context) => BlocProvider(
         create: (context) => EditTodoBloc(
-          todosRepository: context.read<TodosRepository>(),
-          // initialTodo: initialTodo,
-        ),
+            todosRepository: context.read<TodosRepository>(),
+            initialTodo: initialTodo
+            // initialTodo: initialTodo,
+            ),
         child: const EditTodoPage(),
       ),
     );

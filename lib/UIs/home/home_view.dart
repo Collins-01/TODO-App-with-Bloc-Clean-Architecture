@@ -31,8 +31,6 @@ class _HomeViewContents extends StatelessWidget {
         child: IndexedStack(
           index: selectedTab.index,
           children: const [
-            // TodoOverViewPage(),
-            // Scaffold(),
             TodoOverViewPage(),
             StatsPage(),
           ],
